@@ -6,11 +6,50 @@ namespace ExceptionsDemo
     {
         static void Main()
         {
+            CalcAreaExceptionHandled();
             // Division(100, 0);
             //ReadTextFile();
 
-            SimpleBankAccount bankAccount = new (100);
-            bankAccount.Withdraw(300);
+            // SimpleBankAccount bankAccount = new (100);
+            //bankAccount.Withdraw(300);
+        }
+
+        public static void CalcArea()
+        {
+            Console.WriteLine("Please enter a radius in cm");
+            double radius = double.Parse(Console.ReadLine() ?? string.Empty);
+            double area = Math.PI * Math.Pow(radius, 2);
+            Console.WriteLine($"The area is {Math.Round(area, 2)} cm2");
+        }
+
+        public static void CalcAreaDefensive()
+        {
+            Console.WriteLine("Please enter a radius in cm");
+            string input = Console.ReadLine() ?? string.Empty;
+            if (double.TryParse(input, out double radius))
+            {
+                double area = Math.PI * Math.Pow(radius, 2);
+                Console.WriteLine($"The area is {Math.Round(area, 2)} cm2");
+            }
+            else
+            {
+                Console.WriteLine($"Sorry {input} is not a valid radius");
+            }
+        }
+
+        public static void CalcAreaExceptionHandled()
+        {
+            Console.WriteLine("Please enter a radius in cm");
+            try
+            {                
+                double radius = double.Parse(Console.ReadLine() ?? string.Empty);
+                double area = Math.PI * Math.Pow(radius, 2);
+                Console.WriteLine($"The area is {Math.Round(area, 2)} cm2");
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine($"Not able to calculate area, Format Exception: {e}");
+            }            
         }
 
         public static void Division(int num1, int num2)
@@ -49,7 +88,7 @@ namespace ExceptionsDemo
             {
                 Console.WriteLine($"Couldn't read file for some other reason.");
                 Console.WriteLine($"Exception {ex}");
-            }  
+            }
         }
     }
 }
