@@ -49,35 +49,7 @@ namespace ExceptionsDemo
             {
                 Console.WriteLine($"Couldn't read file for some other reason.");
                 Console.WriteLine($"Exception {ex}");
-            }
-           
-
-            
-        }
-
-
-        public static void WriteTextFile()
-        {
-            string fileName = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\TestException.txt";
-            int numTries = 1;
-
-            try
-            {
-                File.AppendAllLines(fileName, new[] { "No problem this time" });
-            }
-            catch (DirectoryNotFoundException e)
-            {
-                Console.WriteLine($"Directory not found.");
-                Console.WriteLine($"Exception {e}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Couldn't read file for some other reason.");
-                Console.WriteLine($"Exception {ex}");
-            }
-
-
-
+            }  
         }
     }
 }
