@@ -10,8 +10,8 @@ namespace ExceptionsDemo
             // Division(100, 0);
             //ReadTextFile();
 
-            // SimpleBankAccount bankAccount = new (100);
-            //bankAccount.Withdraw(300);
+            //SimpleBankAccount bankAccount = new (100);
+            //bankAccount.Withdraw(200);
         }
 
         public static void CalcArea()
