@@ -9,11 +9,11 @@ namespace ExceptionsDemo
     public class SimpleBankAccount
     {
         public decimal Balance { get; private set; }
-        public decimal Overdraft { get; init; }
+        public int Overdraft { get; init; }
 
-        public SimpleBankAccount(decimal overdraft)
+        public SimpleBankAccount(int overdraft)
         {
-            Overdraft = overdraft;
+            Overdraft = Math.Abs(overdraft);
             Balance = 0;
         }
 
@@ -24,7 +24,7 @@ namespace ExceptionsDemo
 
         public void Withdraw(decimal amount)
         {
-            if (Math.Abs(Balance - amount) > Overdraft)
+            if (Balance - amount < Overdraft*-1)
             {
                 throw new InvalidOperationException("Overdraft exceeded");
             }
