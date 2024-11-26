@@ -2,12 +2,19 @@
 
 namespace ExceptionsDemo
 {
-    internal class Program
+    public class Program
     {
-        static void Main()
+		static void Main()
         {
-            CalcAreaExceptionHandled();
-            // Division(100, 0);
+            try
+            {
+                CalcAreaExceptionHandled();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Caught unhandled exeception {ex.Message}");
+            }
+            //Division(100, 0);
             //ReadTextFile();
 
             //SimpleBankAccount bankAccount = new (100);
@@ -39,35 +46,36 @@ namespace ExceptionsDemo
 
         public static void CalcAreaExceptionHandled()
         {
+            double area = 0.0;
             Console.WriteLine("Please enter a radius in cm");
             try
-            {                
-                double radius = double.Parse(Console.ReadLine() ?? string.Empty);
-                double area = Math.PI * Math.Pow(radius, 2);
-                Console.WriteLine($"The area is {Math.Round(area, 2)} cm2");
+            {
+				double radius = double.Parse(Console.ReadLine() ?? string.Empty);
+                area = Math.PI * Math.Pow(radius, 2);               
             }
             catch (FormatException e)
             {
                 Console.WriteLine($"Not able to calculate area, Format Exception: {e}");
-            }            
+                throw;
+            }
+            finally
+            {
+				Console.WriteLine($"The area is {Math.Round(area, 2)} cm2");
+			}
         }
 
         public static void Division(int num1, int num2)
         {
-            int result = 0;
             try
             {
-                result = num1 / num2;
-            }
+                int result = num1 / num2;
+				Console.WriteLine($"Result is {result}");
+			}
             catch (DivideByZeroException e)
             {
-                Console.WriteLine($"Exception caught: {e}");
+               Console.WriteLine($"Exception caught: {e}");
             }
-            finally
-            {
-                Console.WriteLine($"Result is {result}");
-            }
-        }
+		}
 
         public static void ReadTextFile()
         {
